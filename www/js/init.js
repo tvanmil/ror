@@ -2,8 +2,8 @@
 
 var cards = {
 
-	draggables: [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" ],
-	droppables: [ ".", ".", ".", ".", ".", ".", ".", ".", ".", "." ],
+	draggables: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
+	droppables: [ "_", "_", "_", "_", "_", "_", "_", "_" ],
 	
 	// Callback function references the event target and adds the 'swipeleft' class to it
 	swipeleftHandler: function ( event ) {
@@ -49,7 +49,7 @@ var cards = {
 		// initalize without gestures => feed gesture events from
 		// dragstart event, then tell slick carousel to change
 		// the visible card.
-		$( "#card-caroussel" ).slick({ draggable: false, swipe: false });
+		$( "#card-caroussel" ).slick({ draggable: false, swipe: false, arrows: false });
 		$( "#card-caroussel" ).on( "click", ".card-container", function(event) { console.log("click3"); });
 		
 		this.resizeElements();		
@@ -62,7 +62,7 @@ var cards = {
 		var $dropzones = $( '<div class="dropzones"></div>' );
 		var $letters = $( '<div class="letters"></div>' );
 		
-		$card.append( '<h2>Riddle # '+id+'</h2>' );
+		$card.append( '<h2>Riddle #'+id+'</h2>' );
 		$card.append( '<h1>'+title+'</h1>' );
 		
 		$dropzones.append(this.getDroppableHTML(this.droppables));
