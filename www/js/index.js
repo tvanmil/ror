@@ -40,6 +40,7 @@ var app = {
 		//alert(id);
 		cards.initialize();
 
+		$( "div[data-role='content'] div.app" ).remove();
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');

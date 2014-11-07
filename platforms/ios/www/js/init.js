@@ -20,7 +20,7 @@ var cards = {
 
 	initialize: function () {
 	
-		var card = this.getNewCardHTML(1, 'build a tree', 'room_of_riddles', this.droppables, this.draggables);
+		var card = this.getNewCardHTML(1, 'Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?', 'room_of_riddles', this.droppables, this.draggables);
 		var card2 = this.getNewCardHTML(2, 'build a tree2', 'room_of_riddles', this.droppables, this.draggables);
 	
 		$("div:jqmData(role='content')").append('<div id="card-caroussel" style="height:100%;"></div>');
@@ -64,8 +64,6 @@ var cards = {
 		
 		$card.append( '<h2>Riddle # '+id+'</h2>' );
 		$card.append( '<h1>'+title+'</h1>' );
-		console.log('src="img/'+image+'.png"');
-		$card.append( '<img class="riddle-image" src="img/'+image+'.png" />' );
 		
 		$dropzones.append(this.getDroppableHTML(this.droppables));
 		$letters.append(this.getDraggableHTML(this.draggables));
@@ -81,7 +79,7 @@ var cards = {
 			fontSize: $( ".droppable" ).outerWidth()-5+"px",
 			lineHeight: $( ".droppable" ).outerWidth()+"px"
 		});
-		$( "h1" ).css({ fontSize: $( ".droppable" ).outerWidth()/2+"px" });
+		//$( "h1" ).css({ fontSize: $( ".droppable" ).outerWidth()/2+"px" });
 		console.log($( ".droppable" ).outerWidth()/2+"px");
 	},
 	

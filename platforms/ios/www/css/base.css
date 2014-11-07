@@ -1,15 +1,39 @@
 html,body {
-	height:100%;
+	/*height:100%;*/
+}
+body {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	text-transform: none;
+	background-color: white;	background-color: #6cbd35;
+	background-image: linear-gradient(top, #3f7a63 0%, #6cbd35 51%);
+	background-image: -webkit-linear-gradient(top, #3f7a63 0%, #6cbd35 51%);
+	background-image: -ms-linear-gradient(top, #3f7a63 0%, #6cbd35 51%);
+	background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #3f7a63), color-stop(0.51, #6cbd35) );
+	background-attachment: fixed;	
 }
 div[data-role='content'] {
 	height: 100%;
 }
+div[data-role='content'] {
+	background-color: rgba(255,255,255,1);
+	width: 100%;
+   	position: absolute;
+   	bottom: 0;
+   	top: 64px;
+}
+div[data-role='header'] {
+	text-align: center;
+}
+div[data-role='header'] img {
+	margin-top: 28px;
+	height: 30px;
+}
+
 div#card-caroussel {
 	height: 100%;
-	background-color: pink;
 }
 div.card-container {
-	background-color: red;
 	height: 100%;
 	width: 90%;
 	margin-left: auto;
@@ -36,16 +60,20 @@ div.card-container {
 	margin-right: auto 
 }
 h1, h2 {
-	font-family:'Open Sans', sans-serif;
-	text-align:center;
-	font-size:30px;
-	font-weight:bold;
-	padding-left:10%;
-	padding-right:10%;
-	padding-top:5%;
+	font-family: 'Georgia', 'Open Sans', sans-serif;*/
+	color: #b4b4b4;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 100;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 10px;
+	line-height: 30px;
 }
 h2 {
-	font-size:24px;
+	font-size: 18px;
+	margin-top: 36px;
+	color: #b4b4b4;
 }
 .draggable, .droppable {
 	position: absolute;
@@ -54,7 +82,8 @@ h2 {
 	left: 0;
 	right: 0;
 	text-align: center;
-	background-color:lightblue;border:1px solid blue;
+	background-color:lightblue;
+	border:1px solid blue;
 }
 .scaled {
 	background-color: yellow;
