@@ -38,15 +38,28 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 		//alert(id);
-		cards.initialize();
-
+		//cards.initialize();
+		carroussel.initialize();
+		
 		$( "div[data-role='content'] div.app" ).remove();
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+		
+		var c1 = {
+			id: 1,
+			question: 'Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
+			droppables: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
+			draggables: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
+			solution: [ " ", " ", "B", "C", "D", "E"," ", " " ]
+		};
+		carroussel.addCard(card.initialize(c1));
+		c1.id = 2;
+		carroussel.addCard(card.initialize(c1));
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        //var parentElement = document.getElementById(id);
+        //var listeningElement = parentElement.querySelector('.listening');
+        //var receivedElement = parentElement.querySelector('.received');
+
+        //listeningElement.setAttribute('style', 'display:none;');
+        //receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
 	

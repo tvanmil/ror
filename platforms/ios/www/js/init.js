@@ -1,10 +1,18 @@
-
-
-var cards = {
-
-	draggables: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
-	droppables: [ "_", "_", "_", "_", "_", "_", "_", "_" ],
+var carroussel = {
 	
+	initialize: function() {
+	
+		$("div:jqmData(role='content')").append('<div id="card-caroussel" style="height:100%;"></div>');
+
+		$( "#card-caroussel" ).on( "swipeleft", ".card-container", this.swipeleftHandler);
+		$( "#card-caroussel" ).on( "click", ".card-container", this.clickHandler);
+		$( "#card-caroussel" ).on( "swiperight", ".card-container", this.swiperightHandler);
+
+		// initalize without gestures => feed gesture events from dragstart event,
+		// then tell slick carousel to change the visible card.
+		$( "#card-caroussel" ).slick({ draggable: false, swipe: false, arrows: false });
+		
+	},
 	// Callback function references the event target and adds the 'swipeleft' class to it
 	swipeleftHandler: function ( event ) {
 		console.log("swipe left detected.");
@@ -17,45 +25,47 @@ var cards = {
 	clickHandler: function ( event ) { 
 		console.log('click');
 	},
+	addCard: function(card) {
+		$( "#card-caroussel" ).slickAdd(card);
+	}
+};
 
-	initialize: function () {
+
+var card = {
+
+	cardId: 0,
+	solution: [],
 	
-		var card = this.getNewCardHTML(1, 'Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?', 'room_of_riddles', this.droppables, this.draggables);
-		var card2 = this.getNewCardHTML(2, 'build a tree2', 'room_of_riddles', this.droppables, this.draggables);
-	
-		$("div:jqmData(role='content')").append('<div id="card-caroussel" style="height:100%;"></div>');
-
-		// Bind the swipeleftHandler callback function to the swipe event on div.box
-		$( "#card-caroussel" ).on( "swipeleft", ".card-container", this.swipeleftHandler);
-		$( "#card-caroussel" ).on( "click", ".card-container", this.clickHandler);
-		$( "#card-caroussel" ).on( "swiperight", ".card-container", this.swiperightHandler);
-
+	initialize: function ( content ) {
 		
-		$( "#card-caroussel" ).append(card);
-		$( "#card-caroussel" ).append(card2);
+		this.cardId = content.id;
+		this.solution = content.solution;
 		
+		var $card = this.getNewCardHTML ( 
+			content.id, 
+			content.question, 
+			content.droppables, 
+			content.draggables
+		);
+
 		this.initializeDraggables();
 		this.initializeDroppables();
 	
 		$( ".draggable" ).on( "swipeleft", function( event, ui ) { 
-			console.log('y1');
 			event.preventDefault();
 		});
 		$( ".droppable" ).on( "swipeleft", function( event, ui ) { 
-			console.log('y2');
 			event.preventDefault();
 		});
 		
-		// initalize without gestures => feed gesture events from
-		// dragstart event, then tell slick carousel to change
-		// the visible card.
-		$( "#card-caroussel" ).slick({ draggable: false, swipe: false, arrows: false });
-		$( "#card-caroussel" ).on( "click", ".card-container", function(event) { console.log("click3"); });
+		this.resizeElements();
 		
-		this.resizeElements();		
+		this.card = $card;
+
+		return $card;
 	},
 	
-	getNewCardHTML: function (id, title, image, droppables, draggables) {
+	getNewCardHTML: function (id, title, droppables, draggables) {
 	
 		var $card = $( '<div id="card-'+id+'" class="card-container"></div' );
 	
@@ -65,8 +75,8 @@ var cards = {
 		$card.append( '<h2>Riddle #'+id+'</h2>' );
 		$card.append( '<h1>'+title+'</h1>' );
 		
-		$dropzones.append(this.getDroppableHTML(this.droppables));
-		$letters.append(this.getDraggableHTML(this.draggables));
+		$dropzones.append(this.getDroppableHTML(droppables));
+		$letters.append(this.getDraggableHTML(draggables));
 		
 		$card.append($dropzones);
 		$card.append($letters);
@@ -79,28 +89,24 @@ var cards = {
 			fontSize: $( ".droppable" ).outerWidth()-5+"px",
 			lineHeight: $( ".droppable" ).outerWidth()+"px"
 		});
-		//$( "h1" ).css({ fontSize: $( ".droppable" ).outerWidth()/2+"px" });
-		console.log($( ".droppable" ).outerWidth()/2+"px");
 	},
 	
 	getDraggableHTML: function (draggables) {
 		var content = "";
-		$.each(this.draggables, function( key, value) {
+		$.each(draggables, function( key, value) {
 			content += '<div class="letter-container">' +
-			'<div id="letter-'+key+'" class="draggable">' +
-			'<p class="letter-card">'+value+'</p>'+
-			'</div></div>';
-			//$( "#letters" ).append('<div class="letter-container"><div id="letter-'+key+'" class="draggable"><p class="letter-card">'+value+'</p></div></div>');
+				'<div id="letter-'+key+'" class="draggable">' +
+				'<p class="letter-card">'+value+'</p>'+
+				'</div></div>';
 		});
 		return content;
 	},
 	getDroppableHTML: function (droppables) {
 		var content = "";
-		$.each(this.droppables, function( key, value) {
+		$.each(droppables, function( key, value) {
 			content += '<div class="dropzone-container">' +
-			'<div class="droppable"><p class="letter-card">'+value+'</p>' +
-			'</div></div>';
-			//$( "#dropzones" ).append('<div class="dropzone-container"><div class="droppable"><p class="letter-card">'+value+'</p>' + '</div></div>');
+				'<div class="' + (value !== ' ' ? 'droppable' : '') +'"><p class="letter-card">'+value+'</p>' +
+				'</div></div>';
 		});
 		return content;
 	},
@@ -116,9 +122,9 @@ var cards = {
 			stack: ".draggable",
 			create: function(event, ui) { },
 			start: function(event, ui) {
-				console.log('x');
+				/*console.log('x');
 				console.log(event);
-				console.log(event.target);
+				console.log(event.target);*/
 				event.stopPropagation();
 				$( this ).addClass( "scaled" );
 			},
@@ -131,11 +137,15 @@ var cards = {
 			},
 		});
 	},
-	
+	testFunction: function() {
+		console.log("A");
+	},
 	initializeDroppables: function() {
 	
+		_this = this;
 		$( ".droppable" ).droppable({
 			drop: function( event, ui ) {
+
 				$( ui.draggable ).removeClass( "scaled" );
 				$( ui.draggable ).position({
 					my: "center",
@@ -146,12 +156,12 @@ var cards = {
 				var isDroppableFull = false;
 				var presentElementId = 0;
 				
-				console.log($( this ).attr( "class" ));
+				console.log( $( this ).attr( "class" ) );
 				
-				$.each($( this ).attr( "class" ).split(" "), function(index, value){
-					if ( value.substr(0,7) === 'letter-' ) {
+				$.each( $( this ).attr( "class" ).split(" "), function( index, value ){
+					if ( value.substr( 0,7 ) === 'letter-' ) {
 						isDroppableFull = true;
-						presentElementId = value.substring(7);
+						presentElementId = value.substring( 7 );
 					}
 				});
 				
@@ -160,11 +170,45 @@ var cards = {
 					$( "#letter-"+presentElementId ).css({top: 0, left: 0});
 					$( this ).addClass( "empty" ).removeClass( "letter-"+presentElementId );
 				}
-				$( this ).addClass( ui.draggable.attr("id") );
+				$( this ).addClass( ui.draggable.attr( "id" ) );
+				
+				// check if the solution is correct
+				//console.log(this.card);
+				_this.checkSolution();
+				
 			}
 		});
+	},
+	checkSolution: function() {
+		// dropzones hebben een klasse letter-x toegewezen gekregen als
+		// er een letter op gedropt is.
+		// loop over alle dropzones om te kijken welke letter daar op zit.
+		// Dit moet gelijk zijn aan de solution.
+		// Geen letter = " "
+
+		var enteredSolution = [];
+		var i = 0;
+
+		$.each( $(".slick-active").children(".dropzones").children(), function(k,v){ 
+
+			console.log($(v).children().attr('class'));
+			var className = $(v).children().attr('class');
+			$.each( className.split(" "), function( index, value ){
+				console.log("["+value.substring(0,7)+"]");
+				if ( value.substring(0,7) === 'letter-' ) {
+					
+				}
+			});
+			if ( $(v).children().attr('class') == '' ) {
+				// Not an letter on the droppable
+				enteredSolution[i] = " ";
+			} else {
+				enteredSolution[i] = "1";
+			}
+			i++;
+		});
+		console.log(enteredSolution);
 	}
-	
 };
 
 
