@@ -1,0 +1,95 @@
+html,body {
+	height:100%;
+}
+div[data-role='content'] {
+	height: 100%;
+}
+div#card-caroussel {
+	height: 100%;
+	background-color: pink;
+}
+div.card-container {
+	background-color: red;
+	height: 100%;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.letters, .dropzones {
+	float:left;
+	width:100%;
+	margin-left:5.5%;
+	position:relative;
+}
+.dropzones {
+	margin-top: 10%; 
+}
+.letters {
+	margin-top: 5%;
+}
+.riddle-image {
+	width:80%;
+	display:block;
+	margin-top:5%;
+	margin-left: auto;
+	margin-right: auto 
+}
+h1, h2 {
+	font-family:'Open Sans', sans-serif;
+	text-align:center;
+	font-size:30px;
+	font-weight:bold;
+	padding-left:10%;
+	padding-right:10%;
+	padding-top:5%;
+}
+h2 {
+	font-size:24px;
+}
+.draggable, .droppable {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	background-color:lightblue;border:1px solid blue;
+}
+.scaled {
+	background-color: yellow;
+	-webkit-transform: scale(2, 2);
+	transform: scale(2, 2);
+}
+.droppable {
+	background-color:lightgreen;border:1px solid green;
+}
+.letter-card {
+	font-size:30px;
+	font-weight: bold;
+}
+.dropzone-container, .letter-container {
+	float: left;
+	margin-right: 1%;
+	position: relative;
+	width: 8%;
+}
+.dropzone-container:after, .letter-container:after {
+	content: '';
+	display: block;
+	margin-top: 100%;
+}
+
+/* overwrite jquery ui css */
+.ui-mobile .ui-page {
+	min-height: 420px;
+	height: 100%;
+}
+
+/* overwrite slick-slider css */
+.slick-slider {
+	margin-bottom: 0;
+}
+.slick-list, .slick-slider .slick-track {
+	height: 100%;
+}
