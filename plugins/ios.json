@@ -4,7 +4,18 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "framework": {
+                "parents": {
+                    "CoreGraphics.framework": []
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": []
+                }
+            }
+        }
     },
     "installed_plugins": {},
     "dependent_plugins": {}

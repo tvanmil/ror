@@ -92,6 +92,9 @@ h2 {
 .draggable {
 	background-color: #b4b4b4;
 }
+.draggable.correct {
+	background-color: #6cbd35;
+}
 .droppable {
 	border: 1px dashed #b4b4b4;
 	color: #b4b4b4;

@@ -1,3 +1,5 @@
+
+
 var carroussel = {
 	
 	initialize: function() {
@@ -95,7 +97,7 @@ var card = {
 		var content = "";
 		$.each(draggables, function( key, value) {
 			content += '<div class="letter-container">' +
-				'<div id="letter-'+key+'" class="draggable">' +
+				'<div class="draggable letter-'+value+'">' +
 				'<p class="letter-card">'+value+'</p>'+
 				'</div></div>';
 		});
@@ -156,8 +158,6 @@ var card = {
 				var isDroppableFull = false;
 				var presentElementId = 0;
 				
-				console.log( $( this ).attr( "class" ) );
-				
 				$.each( $( this ).attr( "class" ).split(" "), function( index, value ){
 					if ( value.substr( 0,7 ) === 'letter-' ) {
 						isDroppableFull = true;
@@ -167,15 +167,19 @@ var card = {
 				
 				// check if there already is an element in it
 				if ( isDroppableFull ) {
-					$( "#letter-"+presentElementId ).css({top: 0, left: 0});
+					$( ".letter-"+presentElementId ).css({top: 0, left: 0});
 					$( this ).addClass( "empty" ).removeClass( "letter-"+presentElementId );
 				}
-				$( this ).addClass( ui.draggable.attr( "id" ) );
-				
-				// check if the solution is correct
-				//console.log(this.card);
-				_this.checkSolution();
-				
+
+				// get classname of letter of dropped element and add it to the droppable classnames
+				$.each( ui.draggable.attr('class').split(" "), function( index, value ) {
+					if ( value.substr( 0, 7 ) === "letter-" ) {
+						droppedClassName = value;
+					}
+				});
+				$( this ).addClass( droppedClassName );
+
+				_this.checkSolution();	
 			}
 		});
 	},
@@ -191,24 +195,55 @@ var card = {
 
 		$.each( $(".slick-active").children(".dropzones").children(), function(k,v){ 
 
-			console.log($(v).children().attr('class'));
 			var className = $(v).children().attr('class');
+			var foundDroppedLetter = false;
+
 			$.each( className.split(" "), function( index, value ){
-				console.log("["+value.substring(0,7)+"]");
-				if ( value.substring(0,7) === 'letter-' ) {
-					// this droppable has a number on it.
+				if ( value.substring(0,7) === 'letter-' ) { // this droppable has a number on it.
+					console.log("val: "+value.substr(7));
+					enteredSolution[i] = value.substr(7);
+					foundDroppedLetter = true;
 				}
 			});
-			
-			if ( $(v).children().attr('class') == '' ) {
-				// Not an letter on the droppable
+			if (!foundDroppedLetter) {
 				enteredSolution[i] = " ";
 			} else {
-				enteredSolution[i] = "1";
-			}
+				//return false;
+			}	
 			i++;
 		});
+		
 		console.log(enteredSolution);
+		console.log(this.solution);
+		if (this.equals(this.solution, enteredSolution) ) {
+			// for all dropzone-containers, if contains a class which start with
+			// "letter-", make it green for correct!
+			console.log("Correct!");
+			this.showCorrectVisuals();
+		}
+	},
+	
+	showCorrectVisuals: function() {
+		$.each( this.solution, function( index, value) {
+			if ( value !== " " ) $( ".slick-active .letters .letter-container .letter-"+value ).addClass('correct');
+		});
+	},
+	
+	equals: function (array1, array2) { // Supporting function to compare 2 arrays
+	    // if the other array is a falsy value, return
+	    if (!array1 || !array2)
+	        return false;
+	
+	    // compare lengths - can save a lot of time 
+	    if (array1.length != array2.length)
+	        return false;
+	
+	    for (var i = 0, l=array1.length; i < l; i++) {        
+	        if (array1[i] != array2[i]) { 
+	            return false;   
+	        }           
+	    }       
+	    return true;
 	}
 };
 
