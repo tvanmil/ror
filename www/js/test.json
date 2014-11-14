@@ -1,0 +1,32 @@
+{
+	"channel": {
+		"title": "Trent's Blog",
+		"link": "http://trentrichardson.com",
+		"description": "practical programming",
+		"published": "Fri, 28 Dec 2007 04:27:29 +0000",
+		"language": "en",
+		"items": [{
+			"title": "Are You Using Regular Expressions Within SQL?",
+			"url": "http://trentrichardson.com/?p=45",
+			"published": "Fri, 28 Dec 2007 02:32:31 +0000",
+			"author": "trent",
+			"category": "programming",
+			"guid": {
+				"isPermaLink": false,
+				"url": "http://trentrichardson.com/?p=45"
+			},
+			"description": "Are You Using Regular Expressions Within SQL?Are You Using Regular Expressions Within SQL?Are You Using Regular Expressions Within SQL?"
+		},{
+			"title": "Submitting Forms with No Action",
+			"url": "http://trentrichardson.com/?p=39",
+			"published": "Thu, 06 Dec 2007 02:00:32 +0000",
+			"author": "trent",
+			"category": "programming",
+			"guid": {
+				"isPermaLink": false,
+				"url": "http://trentrichardson.com/?p=39"
+			},
+			"description": "Submitting Forms with No ActionSubmitting Forms with No ActionSubmitting Forms with No ActionSubmitting Forms with No ActionSubmitting Forms with No Action"
+		}]
+	}
+}

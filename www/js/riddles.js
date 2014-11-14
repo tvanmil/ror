@@ -7,6 +7,36 @@ $('#pageRiddles').bind( "pageshow", function( e, data ) {
 });
 
 
+var initCards = {};
+initCards.riddles = [];
+	
+initCards.riddles.push({
+	cardid		: 1,
+	solved		: 1,
+	question	: 'Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
+	droppables	: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
+	draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
+	solution	: [ " ", " ", "B", "C", "D", "E"," ", " " ]
+});
+initCards.riddles.push({
+	cardid		: 2,
+	solved		: 0,
+	question	: '2Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
+	droppables	: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
+	draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
+	solution	: [ " ", " ", "B", "C", "D", "E"," ", " " ]
+});
+initCards.riddles.push({
+	cardid		: 3,
+	solved		: 0,
+	question	: '3Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
+	droppables	: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
+	draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
+	solution	: [ " ", " ", "B", "C", "D", "E"," ", " " ]
+});
+window.localStorage.removeItem( "riddles" );
+window.localStorage[ "riddles" ] = JSON.stringify(initCards);
+
 var carroussel = {
 	
 	initialize: function() {
@@ -17,12 +47,49 @@ var carroussel = {
 
 		// initalize without gestures => feed gesture events from dragstart event,
 		// then tell slick carousel to change the visible card.
-		$( "#card-caroussel" ).slick({ draggable: false, swipe: false, arrows: false });
+		$( "#card-caroussel" ).slick({ draggable: false, swipe: false, arrows: false, infinite: false });
 
+		this.loadSlides();
+		
 		this.setupInitialSlides();
 
 	},
 	
+	loadSlides: function() {
+		console.log('loadslides called');
+		// check if slides in local storage
+		if ( window.localStorage[ "riddles" ] ) {
+			// slides in local storage
+			var json = JSON.parse(window.localStorage[ "riddles" ]);
+			var unsolvedRiddles = jsonsql.query("select * from json.riddles where (solved==0) order by cardid asc", json);
+			console.log(unsolvedRiddles);
+			// loop through riddles searching for first unsolved riddle
+			
+				
+		} else {
+			// no slides in local storage => fetch new
+				
+		}
+		
+			
+	},
+	loadNewSlide: function() {
+		console.log('loadslides called');
+		// check if slides in local storage
+		if ( window.localStorage[ "riddles" ] ) {
+			// slides in local storage
+			var json = JSON.parse(window.localStorage[ "riddles" ]);
+			var unsolvedRiddles = jsonsql.query("select * from json.riddles where (solved==0) order by cardid asc limit 1", json);
+			// loop through riddles searching for first unsolved riddle
+			
+				
+		} else {
+			// no slides in local storage => fetch new
+				
+		}
+		
+			
+	},	
 	setupInitialSlides: function () {
 		var c1 = {
 			id			: 1,
@@ -39,7 +106,21 @@ var carroussel = {
 	// Callback function references the event target and adds the 'swipeleft' class to it
 	swipeleftHandler: function ( event ) {
 		console.log("swipe left detected.");
-		$( "#card-caroussel" ).slickNext();
+		if ( $(".slick-track .card-container").last().hasClass('slick-active') ) {
+			// add new card to caroussel
+			var c1 = {
+				id			: 3,
+				question	: 'Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
+				droppables	: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
+				draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
+				solution	: [ " ", " ", "B", "C", "D", "E"," ", " " ]
+			};
+			carroussel.addCard(card.initialize(c1));
+			$( "#card-caroussel" ).slickNext();				
+		} else {
+			$( "#card-caroussel" ).slickNext();	
+		}
+		
 	},
 	swiperightHandler: function ( event ){
 		console.log("swipe right detected.");
@@ -51,6 +132,9 @@ var carroussel = {
 	addCard: function(card) {
 		$( "#card-caroussel" ).slickAdd(card);
 		//card.resizeElements();
+	},
+	retrieveNewCard: function() {
+		// get available card id's that are unsolved
 	}
 };
 
