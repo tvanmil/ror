@@ -21,19 +21,26 @@ body {
 div[data-role='content'] {
 	/*height: 100%;*/
 }
+
 div[data-role='content'] {
 	background-color: rgba(255,255,255,1);
-	width: 100%;
+	/*width: 100%;*/
    	position: absolute;
    	bottom: 0;
+   	left: 0;
+   	right: 0;
    	top: 64px;
 }
 div[data-role='header'] {
 	text-align: center;
+	color: #fff;
+	margin-top: 10px;
+	height: 26px;
+	border: 0;	
 }
 div[data-role='header'] img {
-	margin-top: 6px;
-	height: 30px;
+	margin-top: 0;
+	height: 26px;
 }
 
 div#card-caroussel {
@@ -66,8 +73,8 @@ div.card-container {
 	margin-right: auto 
 }
 h1, h2 {
-	font-family: 'Georgia', 'Open Sans', sans-serif;*/
-	color: #b4b4b4;
+	font-family: 'Georgia', 'Open Sans', sans-serif;
+	color: #000;
 	text-align: center;
 	font-size: 24px;
 	font-weight: 100;
@@ -107,6 +114,7 @@ h2 {
 .letter-card {
 	font-size:30px;
 	font-weight: 100;
+	margin-top: 4px;
 }
 .dropzone-container, .letter-container {
 	float: left;
@@ -119,6 +127,11 @@ h2 {
 	content: '';
 	display: block;
 	margin-top: 100%;
+}
+.login-form-stretch {
+	position: relative;
+	width: 100%;
+	height: 100%
 }
 
 /* overwrite jquery ui css */
@@ -140,6 +153,102 @@ h2 {
 .ui-icon-loading {
     background:none !important;
 }
+
+/* form css */
+.ui-field-contain, .ui-mobile fieldset.ui-field-contain {
+	padding: 0;
+	margin: 0;
+}
+.ui-input-text {
+	border: 0;
+}
+.ui-input-text input {
+	padding: 2em;
+	/*border-top: 1px solid black;*/
+	background-color: #efefef;
+}
+
+#loginForm {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+#loginForm > div[data-role='fieldcontain'] .ui-input-text {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+#loginForm > div[data-role='fieldcontain'].ui-first-child {
+	border: 1px solid #b4b4b4;
+	border-bottom: 0;
+	-webkit-border-top-right-radius: 4px;
+	border-top-right-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	border-top-left-radius: 4px;	
+}
+#loginForm > div[data-role='fieldcontain'].ui-last-child {
+	border: 1px solid #b4b4b4;
+	-webkit-border-bottom-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 4px;	
+}
+#loginForm > div[data-role='fieldcontain'] .ui-input-text input {
+	font-size: 16px;
+	line-height: 16px;
+	padding: 26px;
+	font-family: inherit;
+}
+#loginForm .ui-button {
+	margin-top:20px;
+	width: 100%;
+	padding: 1.5em;
+	font-size: 14px;
+	line-height: 20px;
+	background-color: #3f7a63;
+	border-color: #dddddd;
+	color: #fff;
+	border: 0;
+	border-bottom: 2px solid #000;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	font-family: inherit;
+}
+#loginForm .ui-button:hover {
+	background-color: #6cbd35
+}
+#loginForm .ui-button:active {
+	background-color: #3f7a63
+}
+#loginForm .ui-button:visited {
+	background-color: #3f7a63
+}
+.ui-icon-bars {
+	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20style%3D%22fill%3A%23FFFFFF%3B%22%20d%3D%22M1%2C4h12c0.553%2C0%2C1-0.447%2C1-1s-0.447-1-1-1H1C0.447%2C2%2C0%2C2.447%2C0%2C3S0.447%2C4%2C1%2C4z%20M13%2C6H1%20C0.447%2C6%2C0%2C6.447%2C0%2C7c0%2C0.553%2C0.447%2C1%2C1%2C1h12c0.553%2C0%2C1-0.447%2C1-1C14%2C6.447%2C13.553%2C6%2C13%2C6z%20M13%2C10H1c-0.553%2C0-1%2C0.447-1%2C1%20s0.447%2C1%2C1%2C1h12c0.553%2C0%2C1-0.447%2C1-1S13.553%2C10%2C13%2C10z%22%2F%3E%3C%2Fsvg%3E");
+	background-size: 20px 20px;
+	width: 20px;
+	height: 20px;
+	top: 6px;	
+}	
+.score-counter,.score-counter:visited {
+	color: #fff;
+	text-decoration: none;
+	top: 13px;
+}
+
+.ui-panel-wrapper {
+	height: 100%;
+}
+.menu-panel {
+	background-color: yellow;
+	padding-top: 64px;
+}
+.menu-panel .ui-listview a {
+	background-color: #b4b4b4;
+	font-size: 16px;
+	line-height: 16px;
+	padding: 26px;	
+}
+
 
 /* overwrite slick-slider css */
 .slick-slider {
