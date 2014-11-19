@@ -17,6 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
+
 <html>
     <head>
         <meta charset="utf-8" />
@@ -26,28 +27,153 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
 		<link rel="stylesheet" type="text/css" href="css/slick.css" />
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
         <title>Hello World</title>
     </head>
     <body>
-
-		<div data-role="page" id="home">
+		
+		<div data-role="page" id="pageHomescreen">
+			<div data-role="panel" id="menu-panel" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
+				<ul data-role="listview" class="ui-listview">
+					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
+					<li><a href="#pageAbout" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
+				</ul>
+            </div>    
+          
 			<div data-role="header">
-				<img src="img/logo.png">
+				<!--
+				<a href="#" onclick="$('#menu-panel').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
+				<img src="img/logo.png">A
+				<a href="#" class="score-counter">231.342</a>
+				-->
 			</div>
+			
 			<div data-role="content">
-		        <div class="app">
-		            <h1>Apache Cordova</h1>
-		            <div id="deviceready" class="blink">
-		                <p class="event listening">Connecting to Device</p>
-		                <p class="event received">Device is Ready</p>
-		            </div>
-		        </div>
+				CONTENT!
+			</div>			
+		</div>
+		
+		
+		<div data-role="page" id="pageLogin">
+			<div data-role="panel" id="menu-panel" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
+				<ul data-role="listview" class="ui-listview">
+					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
+					<li><a href="#pageAbout" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
+				</ul>
+            </div>    
+          
+			<div data-role="header">
+				<a href="#" onclick="$('#menu-panel').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
+				<img src="img/logo.png">
+				<a href="#" class="score-counter">231.342</a>
+			</div>
+			
+			<div data-role="content">
+				<div style="display:block !important;width:80%;height:30px;margin-top:50px;background-color:lightgreen;"
+					onclick="$.mobile.changePage('#pageRiddles',{reverse: false, changeHash: false});">Riddles</div>
+				<div class="login-form-stretch">
+					<form id="loginForm">
+						<div data-role="fieldcontain" class="ui-hide-label ui-first-child">
+							<label for="email">Email:</label>
+							<input type="text" name="email" id="email" value="" placeholder="Email" class="ui-corner-none"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label ui-last-child">
+							<label for="password">Password:</label>
+							<input type="password" name="password" id="password" value="" placeholder="Password" />
+						</div>						
+						<input type="submit" value="LOG IN" id="submitButton">
+					</form>
+				</div>
 			</div>
 		</div>
 
+
+
+
+		<div data-role="page" id="pageRiddles">
+			<div data-role="panel" id="menu-panel-home" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
+				<ul data-role="listview" class="ui-listview">
+					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
+					<li><a href="#pageAbout" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
+				</ul>
+            </div>   			
+			<div data-role="header">
+				<a href="#" onclick="$('#menu-panel-home').panel('open');">
+					<div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div>
+				</a>
+				<img src="img/logo.png">
+				<a href="#" class="score-counter">231.342</a>
+			</div>
+			<div data-role="content">
+				<div id="card-caroussel"></div>
+			</div>
+		</div>
+
+
+
+		<div data-role="page" id="pageLeaderboard">
+			<div data-role="panel" id="menu-panel-leaderboard" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
+				<ul data-role="listview" class="ui-listview">
+					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
+					<li><a href="#pageAbout" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
+				</ul>
+            </div>    
+          
+			<div data-role="header">
+				<a href="#" onclick="$('#menu-panel-leaderboard').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
+				<img src="img/logo.png">
+				<a href="#" class="score-counter">231.342</a>
+			</div>
+			
+			<div data-role="content">
+				Leaderboard
+			</div>
+		</div>
+
+
+		<div data-role="page" id="pageAbout">
+			<div data-role="panel" id="menu-panel-about" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
+				<ul data-role="listview" class="ui-listview">
+					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
+					<li><a href="#pageAbout" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
+				</ul>
+            </div>    
+          
+			<div data-role="header">
+				<a href="#" onclick="$('#menu-panel-about').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
+				<img src="img/logo.png">
+				<a href="#" class="score-counter">231.342</a>
+			</div>
+			
+			<div data-role="content">
+				<h1>Room of Riddles</h1>
+				<p><strong>Version 1.0.0<br/>
+				Copyright (c) 2014 - Room of Riddles B.V.</strong></p>
+				<p>The Room of Riddles app is created for Room of Riddles B.V.
+				All of the trademarks, images and logos displayed on this application
+				are the property of Room of Riddles B.V.</p>
+				
+				<p>Iedere aansprakelijkheid voor eventuele schade ten gevolge van toegang
+				tot en gebruik van de app, wordt door Room of Riddles B.V. uitdrukkelijk
+				afgewezen. Er wordt geen garantie geboden voor het foutloos en 
+				ononderbroken functioneren van de app.</p>
+				
+				
+				
+			</div>
+		</div>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -56,8 +182,18 @@
 		<script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
 		<script type="text/javascript" src="js/jquery-ui.js"></script>
 		<script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-		<script type="text/javascript" src="js/init.js"></script>
+		<script type="text/javascript" src="js/jsonsql-0.1.js"></script>
+		<script type="text/javascript" src="js/riddles.js"></script>
+		<script type="text/javascript" src="js/authenticate.js"></script>
 		<script type="text/javascript" src="js/slick.js"></script>
-
+		<script type="text/javascript">
+		$(function(){
+			if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+				document.addEventListener("deviceready", onDeviceReady, false);
+			} else {
+				app.onDeviceReady();
+			}			
+		});
+		</script>
     </body>
 </html>

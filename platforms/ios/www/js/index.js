@@ -16,7 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+
 var app = {
+	
+	debug: false,
+	
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -37,23 +42,28 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-		//alert(id);
-		//cards.initialize();
-		carroussel.initialize();
-		
-		$( "div[data-role='content'] div.app" ).remove();
-		
-		var c1 = {
-			id: 1,
-			question: 'Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
-			droppables: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
-			draggables: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
-			solution: [ " ", " ", "B", "C", "D", "E"," ", " " ]
-		};
-		carroussel.addCard(card.initialize(c1));
-		c1.id = 2;
-		carroussel.addCard(card.initialize(c1));
-
+		/*
+    	if ( id === 'loginInitiated' ) {
+			$("#loginForm").on("submit",function(event){
+				event.preventDefault();
+				console.log('submit triggered');
+				auth.handleLogin();
+			});
+			//if ( auth.checkPreAuth() ) $.mobile.changePage('#pageRiddles',{transition: "slideup", reverse: false, changeHash: false});
+		}
+		*/
+		console.log(id);
+		if ( id === 'loginInitiated' ) {
+			//$.mobile.changePage('#pageRiddles',{transition: "slideup", reverse: false, changeHash: false});
+			//$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
+			
+			setTimeout(
+				function() {
+					$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
+				}, 50
+			);
+			
+		}
         //var parentElement = document.getElementById(id);
         //var listeningElement = parentElement.querySelector('.listening');
         //var receivedElement = parentElement.querySelector('.received');
@@ -62,7 +72,6 @@ var app = {
         //receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-	
     }
 };
 

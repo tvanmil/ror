@@ -33,9 +33,34 @@
         <title>Hello World</title>
     </head>
     <body>
-
+		
+		<div data-role="page" id="pageHomescreen">
+			<div data-role="panel" id="menu-panel" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
+				<ul data-role="listview" class="ui-listview">
+					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
+					<li><a href="#pageAbout" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
+				</ul>
+            </div>    
+          
+			<div data-role="header">
+				<!--
+				<a href="#" onclick="$('#menu-panel').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
+				<img src="img/logo.png">A
+				<a href="#" class="score-counter">231.342</a>
+				-->
+			</div>
+			
+			<div data-role="content">
+				CONTENT!
+			</div>			
+		</div>
+		
+		
 		<div data-role="page" id="pageLogin">
 			<div data-role="panel" id="menu-panel" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
 					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
 					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
@@ -50,7 +75,8 @@
 			</div>
 			
 			<div data-role="content">
-				<div style="display:block !important;width:80%;height:30px;margin-top:50px;background-color:lightgreen;" onclick="$.mobile.changePage('#pageRiddles');">Riddles</div>
+				<div style="display:block !important;width:80%;height:30px;margin-top:50px;background-color:lightgreen;"
+					onclick="$.mobile.changePage('#pageRiddles',{reverse: false, changeHash: false});">Riddles</div>
 				<div class="login-form-stretch">
 					<form id="loginForm">
 						<div data-role="fieldcontain" class="ui-hide-label ui-first-child">
@@ -72,6 +98,7 @@
 
 		<div data-role="page" id="pageRiddles">
 			<div data-role="panel" id="menu-panel-home" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
 					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
 					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
@@ -94,6 +121,7 @@
 
 		<div data-role="page" id="pageLeaderboard">
 			<div data-role="panel" id="menu-panel-leaderboard" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
 					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
 					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
@@ -115,6 +143,7 @@
 
 		<div data-role="page" id="pageAbout">
 			<div data-role="panel" id="menu-panel-about" class="menu-panel" data-position="left" data-display="push">
+				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
 					<li><a href="#pageLogin" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
 					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
@@ -129,7 +158,20 @@
 			</div>
 			
 			<div data-role="content">
-				About
+				<h1>Room of Riddles</h1>
+				<p><strong>Version 1.0.0<br/>
+				Copyright (c) 2014 - Room of Riddles B.V.</strong></p>
+				<p>The Room of Riddles app is created for Room of Riddles B.V.
+				All of the trademarks, images and logos displayed on this application
+				are the property of Room of Riddles B.V.</p>
+				
+				<p>Iedere aansprakelijkheid voor eventuele schade ten gevolge van toegang
+				tot en gebruik van de app, wordt door Room of Riddles B.V. uitdrukkelijk
+				afgewezen. Er wordt geen garantie geboden voor het foutloos en 
+				ononderbroken functioneren van de app.</p>
+				
+				
+				
 			</div>
 		</div>
 

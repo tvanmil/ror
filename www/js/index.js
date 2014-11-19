@@ -19,6 +19,9 @@
 
 
 var app = {
+	
+	debug: false,
+	
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -39,16 +42,28 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-
-    	if ( id === 'init-pageLogin' ) {
+		/*
+    	if ( id === 'loginInitiated' ) {
 			$("#loginForm").on("submit",function(event){
 				event.preventDefault();
 				console.log('submit triggered');
 				auth.handleLogin();
 			});
-			auth.checkPreAuth();
+			//if ( auth.checkPreAuth() ) $.mobile.changePage('#pageRiddles',{transition: "slideup", reverse: false, changeHash: false});
 		}
-		
+		*/
+		console.log(id);
+		if ( id === 'loginInitiated' ) {
+			//$.mobile.changePage('#pageRiddles',{transition: "slideup", reverse: false, changeHash: false});
+			//$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
+			
+			setTimeout(
+				function() {
+					$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
+				}, 50
+			);
+			
+		}
         //var parentElement = document.getElementById(id);
         //var listeningElement = parentElement.querySelector('.listening');
         //var receivedElement = parentElement.querySelector('.received');
