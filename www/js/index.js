@@ -58,16 +58,19 @@ var app = {
 			//$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
 			
 			// add label with 'checking login'
-			console.log("AXA");
-			console.log($( "div[data-role='page']#pageHomescreen div[data-role='content']" ));
-			$( "div[data-role='page']#pageHomescreen div[data-role='content']" ).append( "Checking login..." );
+			$( "div[data-role='page']#pageHomescreen div[data-role='content']" ).append( 
+				"<div style='position:absolute;top:60%;left:0;right:0;color:white;'>"+
+				'<a href="#loginPopup" data-rel="popup" data-transition="slideup" data-position-to="window">Open dialog</a>'+
+				"Login successful</div>"
+			);
+			
 			
 			if ( auth.checkPreAuth() ) {
 				console.log("AAAAAA");
 			}
 			setTimeout(
 				function() {
-					$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
+					//$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
 				}, 500
 			);
 			

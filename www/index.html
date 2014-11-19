@@ -53,7 +53,22 @@
 			</div>
 			
 			<div data-role="content">
-				CONTENT!
+				<div data-role="popup" id="loginPopup">
+					<div class="login-form-stretch">
+						<form id="loginForm">
+							<div data-role="fieldcontain" class="ui-hide-label ui-first-child">
+								<label for="email">Email:</label>
+								<input type="text" name="email" id="email" value="" placeholder="Email" class="ui-corner-none"/>
+							</div>
+							<div data-role="fieldcontain" class="ui-hide-label ui-last-child">
+								<label for="password">Password:</label>
+								<input type="password" name="password" id="password" value="" placeholder="Password" />
+							</div>						
+							<input type="submit" value="LOG IN" id="submitButton">
+							<input type="submit" value="REGISTER" id="registerButton">
+						</form>
+					</div>
+				</div>
 			</div>			
 		</div>
 		
