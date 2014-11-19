@@ -1,3 +1,9 @@
+$('#pageLogin').bind( "pageshow", function( e, data ) {
+	console.log("pageshow called on #pageLogin");
+	app.receivedEvent('loginInitiated');
+});
+
+
 var auth = {
 
 	checkPreAuth : function() {

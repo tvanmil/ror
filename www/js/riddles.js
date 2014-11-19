@@ -22,11 +22,6 @@ $('#pageRiddles').bind( "pageshow", function( e, data ) {
 	carroussel.initialize();
 	app.receivedEvent('loginInitiated');
 });
-$('#pageLogin').bind( "pageshow", function( e, data ) {
-	console.log("pageshow called on #pageLogin");
-	app.receivedEvent('loginInitiated');
-	//app.receivedEvent('loginInitiated')	
-});
 $('#pageHomescreen').bind( "pageshow", function( e, data ) {
 	console.log("pageshow called on #pageHomescreen");
 	setTimeout( function() { app.receivedEvent('loginInitiated'); }, 1000 );

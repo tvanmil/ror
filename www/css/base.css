@@ -10,13 +10,13 @@ strong {
 	height: 100%;
 }
 
-/*
+
 .slide.in, .slide.out {
 	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-duration: 5000ms;
+	-webkit-animation-duration: 1000ms;
 	-moz-animation-timing-function: ease-out;
-	-moz-animation-duration: 5000ms;
-}*/
+	-moz-animation-duration: 1000ms;
+}
 
 body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
@@ -46,7 +46,7 @@ div[data-role='content'] {
    	bottom: 0;
    	left: 0;
    	right: 0;
-   	top: 64px;
+   	top: 66px;
 }
 #pageHomescreen div[data-role='content'] {
 	background-color: transparent;
@@ -57,7 +57,7 @@ div[data-role='header'] {
 	margin-top: 0;/*10px;*/
 	padding-top: 20px;
 	height: 46px;
-	border: 0;	
+	border: 0 solid;	
 }
 div[data-role='header'].ui-header .ui-btn-left > [class*="ui-"] {
 	margin-top: 18px;

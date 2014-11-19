@@ -57,10 +57,18 @@ var app = {
 			//$.mobile.changePage('#pageRiddles',{transition: "slideup", reverse: false, changeHash: false});
 			//$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
 			
+			// add label with 'checking login'
+			console.log("AXA");
+			console.log($( "div[data-role='page']#pageHomescreen div[data-role='content']" ));
+			$( "div[data-role='page']#pageHomescreen div[data-role='content']" ).append( "Checking login..." );
+			
+			if ( auth.checkPreAuth() ) {
+				console.log("AAAAAA");
+			}
 			setTimeout(
 				function() {
 					$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
-				}, 50
+				}, 500
 			);
 			
 		}
