@@ -44,16 +44,10 @@
 				</ul>
             </div>    
           
-			<div data-role="header">
-				<!--
-				<a href="#" onclick="$('#menu-panel').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
-				<img src="img/logo.png">A
-				<a href="#" class="score-counter">231.342</a>
-				-->
-			</div>
+			<div data-role="header"></div>
 			
 			<div data-role="content">
-				<div data-role="popup" id="loginPopup">
+				<div data-role="popup" id="loginPopup" data-transition="slideup" data-dismissible="false">
 					<div class="login-form-stretch">
 						<form id="loginForm">
 							<div data-role="fieldcontain" class="ui-hide-label ui-first-child">
@@ -65,7 +59,7 @@
 								<input type="password" name="password" id="password" value="" placeholder="Password" />
 							</div>						
 							<input type="submit" value="LOG IN" id="submitButton">
-							<input type="submit" value="REGISTER" id="registerButton">
+							<input type="button" value="REGISTER" id="registerButton">
 						</form>
 					</div>
 				</div>
@@ -89,23 +83,7 @@
 				<a href="#" class="score-counter">231.342</a>
 			</div>
 			
-			<div data-role="content">
-				<div style="display:block !important;width:80%;height:30px;margin-top:50px;background-color:lightgreen;"
-					onclick="$.mobile.changePage('#pageRiddles',{reverse: false, changeHash: false});">Riddles</div>
-				<div class="login-form-stretch">
-					<form id="loginForm">
-						<div data-role="fieldcontain" class="ui-hide-label ui-first-child">
-							<label for="email">Email:</label>
-							<input type="text" name="email" id="email" value="" placeholder="Email" class="ui-corner-none"/>
-						</div>
-						<div data-role="fieldcontain" class="ui-hide-label ui-last-child">
-							<label for="password">Password:</label>
-							<input type="password" name="password" id="password" value="" placeholder="Password" />
-						</div>						
-						<input type="submit" value="LOG IN" id="submitButton">
-					</form>
-				</div>
-			</div>
+			<div data-role="content"></div>
 		</div>
 
 

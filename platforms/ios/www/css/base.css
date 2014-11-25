@@ -8,6 +8,7 @@ strong {
 
 .ui-mobile, .ui-mobile body {
 	height: 100%;
+	background-color: yellow;
 }
 
 
@@ -22,7 +23,7 @@ body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 	font-weight: 300;
 	text-transform: none;
-	background-color: white;
+	background-color: yellow;
 	background-color: #6cbd35;
 	background-image: linear-gradient(top, #6cbd35 0%, #3f7a63 51%);
 	background-image: -webkit-linear-gradient(top, #6cbd35 0%, #3f7a63 51%);
@@ -36,16 +37,16 @@ body {
     top: auto !important;
     bottom: 0 !important;
     width: 85%;
-	-webkit-box-shadow: 0 0 10px 10px rgba(0,0,0,0.4);
-	box-shadow: 0 0 10px 10px rgba(0,0,0,0.4);
+	-webkit-box-shadow: 0 0 10px 10px rgba(0,0,0,0.2);
+	box-shadow: 0 0 10px 10px rgba(0,0,0,0.2);
 	-webkit-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
 	background-color: white;
 }
 #pageHomescreen .ui-popup-container .ui-popup.ui-body-inherit {
 	border: 0;
-	padding: 10px;
-	padding-bottom: 20px;
+	padding: 20px;
+	padding-bottom: 30px;
 }
 #pageHomescreen #loginForm {
 	top: 0%;
@@ -80,10 +81,10 @@ div[data-role='header'].ui-header .ui-btn-left > [class*="ui-"] {
 	margin-top: 18px;
 }
 .ui-header .ui-btn-right {
-	top: 30px;
+	top: 32px;
 }
 div[data-role='header'] img {
-	margin-top: 13px;
+	margin-top: 14px;
 	height: 26px;
 }
 
@@ -240,13 +241,13 @@ h2 {
 #loginForm > div[data-role='fieldcontain'] .ui-input-text input {
 	font-size: 16px;
 	line-height: 16px;
-	padding: 26px;
+	padding: 16px;
 	font-family: inherit;
 }
 #loginForm .ui-button {
 	margin-top:20px;
 	width: 100%;
-	padding: 1.5em;
+	padding: 14px; /* 1.5em; */
 	font-size: 14px;
 	line-height: 20px;
 	background-color: #6cbd35; /*#3f7a63;*/
@@ -257,6 +258,9 @@ h2 {
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
 	font-family: inherit;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 #loginForm .ui-button:hover {
 	background-color: #3f7a63; /*#6cbd35*/
@@ -285,11 +289,12 @@ h2 {
 }
 .menu-panel {
 	/*background-color: yellow;*/
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.2);
+	padding-right: 1px;
 }
 div[data-role='panel'] .panel-header {
 	background-color: rgba(0, 0, 0, 0.3);
-	height: 64px;
+	height: 66px;
 	margin-top: -1em;
 	margin-left: -1em;
 	margin-right: -1em;	
@@ -306,7 +311,7 @@ div[data-role='panel'].menu-panel .ui-listview > li > a.ui-btn {
 	padding: 26px;
 	padding-left: 0px;
 	border: 0 solid;
-	color: rgba(255, 255, 255, 0.8);
+	color: rgba(255, 255, 255, 1);
 	text-decoration: none;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }

@@ -1,34 +1,80 @@
 $('#pageLogin').bind( "pageshow", function( e, data ) {
-	console.log("pageshow called on #pageLogin");
+	//console.log("pageshow called on #pageLogin");
 	app.receivedEvent('loginInitiated');
 });
+$( "#registerButton" ).on( "click" ,function(event){
+	auth.register();
+});
+	
+$("#loginForm").on("submit",function(event){
+	event.preventDefault();
 
-
+	if ( auth.login() ) {
+		setTimeout( function() { $.mobile.changePage( "#pageRiddles", { 
+			transition: "fade", 
+			reverse: false, 
+			changeHash: false 
+		}); }, 1500 );							
+	}
+});
+			
 var auth = {
 
-	checkPreAuth : function() {
-		return true;
-		window.localStorage.removeItem( "email" );
-		//console.log("checkPreAuth, user: "+window.localStorage["username"]+", pw: "+window.localStorage["password"]);
+	checkPreAuth: function() {
+
+		//window.localStorage.removeItem( "email" );
 		var form = $( "#loginForm" );
-		window.localStorage[ "email" ] = null;
-		if (window.localStorage[ "email" ] != undefined && window.localStorage[ "password" ] != undefined) {
-			console.log( "email saved" );
+		
+		if ( window.localStorage[ "email" ] != undefined && window.localStorage[ "password" ] != undefined ) {
+			alert( window.localStorage[ "email" ] + " - " + window.localStorage[ "password" ]);
 			$( "#email", form ).val( window.localStorage[ "email" ] );
 			$( "#password", form ).val( window.localStorage[ "password" ] );
-			handleLogin();
+			this.handleLogin();
 			return true;
-		} else {
-			console.log( "no email saved." );
-			return false;
 		}
+		return false;
 	},
 	
-	handleLogin: function() {
-		console.log( "handleLogin called." );
+	login: function() {
+
 		var form = $( "#loginForm" );
+
+		//disable the button so we can't resubmit while we wait
+		$( "#registerButton", form ).attr( "disabled", "disabled" );
+
+		var u = $( "#email", form).val();
+		var p = $( "#password", form).val();
+		if (u != '' && p != '') {
+			$.post( "http://31.222.168.185/riddle/auth.php?method=login&returnformat=json", {
+				action   	: 'register',
+				email 		: u,
+				password	: p
+			}, function(res) {
+				alert(JSON.stringify(res));
+				//navigator.notification.alert("Your login failed", function() {});
+				$( "#registerButton", form ).removeAttr( "disabled" );
+				if (res.authenticated == true) {
+					window.localStorage[ "email" ] = u;
+					window.localStorage[ "password" ] = p;
+					return true;
+				} else {
+					return false;
+				}
+			}, "json");
+		} else {
+			alert( "You must enter a username and password" );
+			$( "#registerButton", form ).removeAttr( "disabled" );
+		}
+		return false;
+	},
+	
+	register: function() {
+		console.log("test");
+		var form = $( "#loginForm" );
+
 		//disable the button so we can't resubmit while we wait
 		$( "#submitButton", form ).attr( "disabled", "disabled" );
+
 		var u = $( "#email", form).val();
 		var p = $( "#password", form).val();
 		if (u != '' && p != '') {
@@ -37,25 +83,25 @@ var auth = {
 				email 		: u,
 				password	: p
 			}, function(res) {
-				if (res.authenticated == true) {
-					//store
-					window.localStorage["email"] = u;
-					window.localStorage["password"] = p;
-					//document.location.href = 'riddles.html'
-					//$.mobile.changePage("riddles.html");
-				} else {
-					//navigator.notification.alert("Your login failed", function() {});
-				}
 				$( "#submitButton", form ).removeAttr( "disabled" );
+				alert(JSON.stringify(res));
+
+				if (res.authenticated == true) {
+
+					window.localStorage[ "email" ] = u;
+					window.localStorage[ "password" ] = p;
+					return true;
+				} else {
+					return false;
+				}
 			}, "json");
 		} else {
-			//Thanks Igor!
-			navigator.notification.alert( "You must enter a username and password", function() { });
+			alert( "You must enter a username and password" );
 			$( "#submitButton", form ).removeAttr( "disabled" );
 		}
 		return false;
 	},
-	
+		
 	getLeaderboardScore: function() {
 		console.log( "leaderboard called." );
 		$.post( "http://31.222.168.185/riddle/getleaderbord.php", {

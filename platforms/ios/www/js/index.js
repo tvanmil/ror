@@ -38,43 +38,34 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+    	//alert(JSON.stringify(navigator.splashscreen));
+    	//alert(JSON.stringify(navigator.notification));
+    	
         app.receivedEvent('deviceready');
+        
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-		/*
-    	if ( id === 'loginInitiated' ) {
-			$("#loginForm").on("submit",function(event){
-				event.preventDefault();
-				console.log('submit triggered');
-				auth.handleLogin();
-			});
-			//if ( auth.checkPreAuth() ) $.mobile.changePage('#pageRiddles',{transition: "slideup", reverse: false, changeHash: false});
-		}
-		*/
-		console.log(id);
+        console.log('Received Event: ' + id);
+
+    	if ( id === 'deviceready' ) navigator.splashscreen.hide();
+
 		if ( id === 'loginInitiated' ) {
-			//$.mobile.changePage('#pageRiddles',{transition: "slideup", reverse: false, changeHash: false});
-			//$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
 			
-			// add label with 'checking login'
-			$( "div[data-role='page']#pageHomescreen div[data-role='content']" ).append( 
-				"<div style='position:absolute;top:60%;left:0;right:0;color:white;'>"+
-				'<a href="#loginPopup" data-rel="popup" data-transition="slideup" data-position-to="window">Open dialog</a>'+
-				"Login successful</div>"
-			);
-			
-			
-			if ( auth.checkPreAuth() ) {
-				console.log("AAAAAA");
+			if ( false && auth.checkPreAuth() ) { // show riddle screen
+				alert('logged in');
+				setTimeout( function() { $.mobile.changePage( "#pageRiddles", { 
+					transition: "fade", 
+					reverse: false, 
+					changeHash: false 
+				}); }, 500 );
+				
+			} else { // open register button
+				$( "#loginPopup" ).popup( "open" );
 			}
-			setTimeout(
-				function() {
-					//$.mobile.changePage('#pageRiddles',{transition: "slide", reverse: false, changeHash: false});
-				}, 500
-			);
 			
 		}
+		
         //var parentElement = document.getElementById(id);
         //var listeningElement = parentElement.querySelector('.listening');
         //var receivedElement = parentElement.querySelector('.received');
@@ -82,8 +73,28 @@ var app = {
         //listeningElement.setAttribute('style', 'display:none;');
         //receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
     }
 };
 
 app.initialize();
+
+function showMessage(message, title){
+
+	title = title || "default title";
+	buttonName = buttonName || 'OK';
+	
+	if(navigator.notification && navigator.notification.alert){
+	
+		navigator.notification.alert(
+			message,    // message
+			function() {},   // callback
+			title,      // title
+			'OK'  // buttonName
+		);
+	
+	}else{
+		alert(message);
+		callback();
+	}
+
+}

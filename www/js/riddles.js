@@ -18,12 +18,12 @@ $('#pageRiddles').bind( "pageshow", function( e, data ) {
 	console.log( $("#pageRiddles div[data-role='header']").css("top") );
 	console.log( $("#pageRiddles div[data-role='header']").css("bottom") );
 	*/
-	console.log("pageshow called on #pageRiddles");
+	//console.log("pageshow called on #pageRiddles");
 	carroussel.initialize();
-	app.receivedEvent('loginInitiated');
+	//app.receivedEvent('loginInitiated');
 });
 $('#pageHomescreen').bind( "pageshow", function( e, data ) {
-	console.log("pageshow called on #pageHomescreen");
+	//console.log("pageshow called on #pageHomescreen");
 	setTimeout( function() { app.receivedEvent('loginInitiated'); }, 1000 );
 	//app.receivedEvent('loginInitiated')	
 });
@@ -67,9 +67,9 @@ var carroussel = {
 		
 		if (this.initialized) return true; // prevent double initialization, otherwise leads to errors
 		
-		console.log("BBBBB");
+		//console.log("BBBBB");
 		$( "#card-caroussel" ).on( "swipeleft", ".card-container", this.swipeleftHandler);
-		$( "#card-caroussel" ).on( "click", ".card-container", function(){ console.log('click2');this.clickHandler; });
+		$( "#card-caroussel" ).on( "click", ".card-container", function(){ this.clickHandler; });
 		$( "#card-caroussel" ).on( "swiperight", ".card-container", this.swiperightHandler);
 
 		// initalize without gestures => feed gesture events from dragstart event,
@@ -83,14 +83,14 @@ var carroussel = {
 	},
 	
 	loadSlides: function() {
-		console.log('loadslides called');
+		//console.log('loadslides called');
 		// check if slides in local storage
 		if ( window.localStorage[ "riddles" ] ) {
 			// slides in local storage
 			var json = JSON.parse(window.localStorage[ "riddles" ]);
 			var unsolvedRiddles = jsonsql.query("select * from json.riddles where (solved==0) order by cardid asc limit 2", json);
 			// loop through riddles searching for first unsolved riddle
-			console.log(unsolvedRiddles.length);
+			//console.log(unsolvedRiddles.length);
 			if ( unsolvedRiddles.length > 0 ) {
 				$.each( unsolvedRiddles, function( index, value ) {
 					carroussel.addCard( card.initialize( value ) );	
@@ -104,7 +104,7 @@ var carroussel = {
 	},
 	
 	loadNewSlide: function( lastid ) {
-		console.log('loadslides called');
+		//console.log('loadslides called');
 		// check if slides in local storage
 		if ( window.localStorage[ "riddles" ] ) {
 			// slides in local storage
@@ -152,7 +152,7 @@ var carroussel = {
 	swipeleftHandler: function ( event ) {
 		//console.log(this);
 		//_this = this;
-		console.log("swipe left detected.");
+		//console.log("swipe left detected.");
 		if (app.debug) alert("swipe l1");
 		if ( $(".slick-track .card-container").last().hasClass('slick-active') ) {
 			if (app.debug) alert("swipe l2");
@@ -164,11 +164,11 @@ var carroussel = {
 		
 	},
 	swiperightHandler: function ( event ){
-		console.log("swipe right detected.");
+		//console.log("swipe right detected.");
 		$( "#card-caroussel" ).slickPrev();
 	},
 	clickHandler: function ( event ) { 
-		console.log('click');
+		//console.log('click');
 	},
 	addCard: function(card) {
 		$( "#card-caroussel" ).slickAdd(card);
@@ -370,29 +370,36 @@ var card = {
 	},
 	
 	uploadCompletedRiddle: function(solution) {
+
+		_this = this;
+		
 		$.post("http://31.222.168.185/riddle/postscore.php", {
 			action		: 'postscore',
 			cardid		: this.getCardId(),
-			email		: ( window.localStorage[ "email "] ? window.localStorage[ "email" ] : 'none' ),
-			password	: ( window.localStorage[ "password "] ? window.localStorage[ "password" ] : 'none' ),
+			email		: ( window.localStorage[ "email" ] ? window.localStorage[ "email" ] : 'none' ),
+			password	: ( window.localStorage[ "password" ] ? window.localStorage[ "password" ] : 'none' ),
 			solution	: JSON.stringify(solution)
 		}, function(res) {
 			console.log("result received: "+res);
+			res = JSON.parse(res);
 			if (res.received == true) {
 				// score has been received (and maybe validated in the future)
-				console.log('true');
-				this.showCorrectVisuals();
+				_this.showCorrectVisuals();
 			} else {
-				console.log('false');
 				// score has not been received or incorrect
 			}
 		});
 	},
 	
 	showCorrectVisuals: function() {
+		console.log('show correct called.');
 		$.each( this.solution, function( index, value) {
 			if ( value !== " " ) $( ".slick-active .letters .letter-container .letter-" + value ).addClass( 'correct' );
 		});
+		// timeout and call slidenext();
+		setTimeout( function() { 
+			$(".card-container.slick-active").trigger('swipeleft');
+		}, 1500);
 	},
 	
 	equals: function (array1, array2) { // Supporting function to compare 2 arrays
