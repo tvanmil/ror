@@ -50,8 +50,10 @@ var carroussel = {
 	initialize: function() {
 		
 		_this = this;
+		
 		if (this.initialized) return true; // prevent double initialization, otherwise leads to errors
 		
+		console.log("Initializing carroussel.");
 		$( "#card-caroussel" ).on( "swipeleft", ".card-container", this.swipeleftHandler);
 		$( "#card-caroussel" ).on( "click", ".card-container", function(){ this.clickHandler; });
 		$( "#card-caroussel" ).on( "swiperight", ".card-container", this.swiperightHandler);
@@ -59,7 +61,11 @@ var carroussel = {
 		// initalize without gestures => feed gesture events from dragstart event,
 		// then tell slick carousel to change the visible card.
 		$( "#card-caroussel" ).slick({ 
-			draggable: false, swipe: false, arrows: false, infinite: false,
+			draggable: false,
+			swipe: false,
+			arrows: false,
+			infinite: false,
+			speed: 300,
 			onAfterChange: function() {
 				//carroussel.removeSlideAfterAnswer();
 			}

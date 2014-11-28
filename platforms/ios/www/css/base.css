@@ -11,12 +11,17 @@ strong {
 	background-color: yellow;
 }
 
+.slide.in, .slide.out { /* page sliding transition speed */
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-duration: 300ms; /*1000ms;*/
+	-moz-animation-timing-function: ease-in-out;
+	-moz-animation-duration: 300ms;
+}
 
-.slide.in, .slide.out {
-	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-duration: 1000ms;
-	-moz-animation-timing-function: ease-out;
-	-moz-animation-duration: 1000ms;
+.ui-panel-animate { /* panel sliding transition speed */
+	-webkit-transition: -webkit-transform 300ms ease-in-out;
+	-moz-transition: -moz-transform 300ms ease-in-out;
+	transition: transform 300ms ease-in-out;
 }
 
 body {
