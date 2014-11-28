@@ -38,8 +38,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-    	//alert(JSON.stringify(navigator.splashscreen));
-    	//alert(JSON.stringify(navigator.notification));
     	
         app.receivedEvent('deviceready');
         
@@ -52,27 +50,24 @@ var app = {
 
 		if ( id === 'loginInitiated' ) {
 			
-			if ( false && auth.checkPreAuth() ) { // show riddle screen
-				alert('logged in');
-				setTimeout( function() { $.mobile.changePage( "#pageRiddles", { 
-					transition: "fade", 
-					reverse: false, 
-					changeHash: false 
-				}); }, 500 );
-				
-			} else { // open register button
-				$( "#loginPopup" ).popup( "open" );
-			}
+			//window.localStorage.removeItem( "email" ); // for testing
+			//window.localStorage.removeItem( "password" ); // for testing
 			
+			auth.checkPreAuth( function(pre_authenticated){
+				console.log("pre authenticated: "+pre_authenticated);
+				if (pre_authenticated) {
+					setTimeout( function() { $.mobile.changePage( "#pageRiddles", { 
+						transition: "fade", 
+						reverse: false, 
+						changeHash: false 
+					}); }, 500 );
+				} else { // open register button
+					console.log("not logged in automatically");
+					$( "#loginPopup" ).popup( "open" );
+				}			
+
+			});  // show riddle screen
 		}
-		
-        //var parentElement = document.getElementById(id);
-        //var listeningElement = parentElement.querySelector('.listening');
-        //var receivedElement = parentElement.querySelector('.received');
-
-        //listeningElement.setAttribute('style', 'display:none;');
-        //receivedElement.setAttribute('style', 'display:block;');
-
     }
 };
 

@@ -2,40 +2,54 @@ $('#pageLogin').bind( "pageshow", function( e, data ) {
 	//console.log("pageshow called on #pageLogin");
 	app.receivedEvent('loginInitiated');
 });
-$( "#registerButton" ).on( "click" ,function(event){
-	auth.register();
+$( "#registerButton" ).on( "click", function(event){
+	auth.register( function(result) {
+		if (result.success == true) {
+			setTimeout( function() { $.mobile.changePage( "#pageRiddles", { 
+				transition: "fade", 
+				reverse: false, 
+				changeHash: false 
+			}); }, 500 );
+		} else if (result.message == 2) {
+			alert('Please choose a different username.');
+		}
+	});
 });
-	
-$("#loginForm").on("submit",function(event){
+
+$("#loginForm").on( "submit", function(event){
 	event.preventDefault();
 
-	if ( auth.login() ) {
-		setTimeout( function() { $.mobile.changePage( "#pageRiddles", { 
-			transition: "fade", 
-			reverse: false, 
-			changeHash: false 
-		}); }, 1500 );							
-	}
+	auth.login( function( result ) {
+		if (result) {
+			setTimeout( function() { $.mobile.changePage( "#pageRiddles", { 
+				transition: "fade", 
+				reverse: false, 
+				changeHash: false 
+			}); }, 1500 );							
+		} else {
+
+		}
+	});
 });
 			
 var auth = {
 
-	checkPreAuth: function() {
-
-		//window.localStorage.removeItem( "email" );
+	checkPreAuth: function(callback) {
 		var form = $( "#loginForm" );
 		
 		if ( window.localStorage[ "email" ] != undefined && window.localStorage[ "password" ] != undefined ) {
-			alert( window.localStorage[ "email" ] + " - " + window.localStorage[ "password" ]);
 			$( "#email", form ).val( window.localStorage[ "email" ] );
 			$( "#password", form ).val( window.localStorage[ "password" ] );
-			this.handleLogin();
-			return true;
+			this.login( function( result ) {
+				console.log("1: "+result);
+				callback(result);
+			});
+		} else {
+			callback(false);
 		}
-		return false;
 	},
 	
-	login: function() {
+	login: function(callback) {
 
 		var form = $( "#loginForm" );
 
@@ -45,31 +59,29 @@ var auth = {
 		var u = $( "#email", form).val();
 		var p = $( "#password", form).val();
 		if (u != '' && p != '') {
-			$.post( "http://31.222.168.185/riddle/auth.php?method=login&returnformat=json", {
-				action   	: 'register',
+			$.post( "http://31.222.168.185/riddle/auth.php?returnformat=json", {
+				action   	: 'login',
 				email 		: u,
 				password	: p
 			}, function(res) {
-				alert(JSON.stringify(res));
-				//navigator.notification.alert("Your login failed", function() {});
 				$( "#registerButton", form ).removeAttr( "disabled" );
 				if (res.authenticated == true) {
 					window.localStorage[ "email" ] = u;
 					window.localStorage[ "password" ] = p;
-					return true;
+					callback(true);
 				} else {
-					return false;
+					callback(false);
 				}
 			}, "json");
 		} else {
-			alert( "You must enter a username and password" );
+			alert( "Please fill out both fields." );
 			$( "#registerButton", form ).removeAttr( "disabled" );
+			callback(false);
 		}
-		return false;
 	},
 	
-	register: function() {
-		console.log("test");
+	register: function(callback) {
+
 		var form = $( "#loginForm" );
 
 		//disable the button so we can't resubmit while we wait
@@ -78,28 +90,26 @@ var auth = {
 		var u = $( "#email", form).val();
 		var p = $( "#password", form).val();
 		if (u != '' && p != '') {
-			$.post( "http://31.222.168.185/riddle/auth.php?method=login&returnformat=json", {
-				action   	: 'login',
+			$.post( "http://31.222.168.185/riddle/auth.php?returnformat=json", {
+				action   	: 'register',
 				email 		: u,
 				password	: p
 			}, function(res) {
 				$( "#submitButton", form ).removeAttr( "disabled" );
-				alert(JSON.stringify(res));
-
-				if (res.authenticated == true) {
-
+				
+				if (res.success == true) {
 					window.localStorage[ "email" ] = u;
 					window.localStorage[ "password" ] = p;
-					return true;
+					callback(res);
 				} else {
-					return false;
+					callback(res);
 				}
 			}, "json");
 		} else {
-			alert( "You must enter a username and password" );
+			alert( "Please fill out both fields." );
 			$( "#submitButton", form ).removeAttr( "disabled" );
+			callback(false);
 		}
-		return false;
 	},
 		
 	getLeaderboardScore: function() {

@@ -7,15 +7,15 @@
         "files": {
             "framework": {
                 "parents": {
-                    "CoreGraphics.framework": [
-                        {
-                            "xml": "false",
-                            "count": 1
-                        }
-                    ],
                     "AudioToolbox.framework": [
                         {
                             "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": "false",
                             "count": 1
                         }
                     ]
@@ -25,11 +25,15 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -38,11 +42,14 @@
         }
     },
     "installed_plugins": {
-        "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
         "org.apache.cordova.dialogs": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "com.roomofriddles.riddleapp"
+        },
+        "org.apache.cordova.splashscreen": {
+            "PACKAGE_NAME": "com.roomofriddles.riddleapp"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.roomofriddles.riddleapp"
         }
     },
     "dependent_plugins": {}

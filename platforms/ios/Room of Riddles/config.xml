@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.roomofriddles.riddleapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="FadeSplashScreenDuration" value=".25" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="true" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
+    <feature name="LocalStorage">
+        <param name="ios-package" value="CDVLocalStorage" />
+    </feature>
+    <feature name="Notification">
+        <param name="ios-package" value="CDVNotification" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
+    <splash height="480" src="res/screen/ios/Default~iphone.png" width="320" />
+    <splash height="960" src="res/screen/ios/Default@2x~iphone.png" width="640" />
+    <splash height="1136" src="res/screen/ios/Default-568h@2x~iphone.png" width="640" />
+    <splash height="1334" src="res/screen/ios/Default-667h.png" width="750" />
+    <splash height="2208" src="res/screen/ios/Default-736h.png" width="1242" />
+    <icon height="60" src="res/screen/ios/icon-60.png" width="60" />
+    <icon height="120" src="res/screen/ios/icon-60@2x.png" width="120" />
+    <icon height="40" src="res/screen/ios/icon-40.png" width="40" />
+    <icon height="80" src="res/screen/ios/icon-40@2x.png" width="80" />
+    <icon height="57" src="res/screen/ios/icon.png" width="57" />
+    <icon height="114" src="res/screen/ios/icon@2x.png" width="114" />
+    <icon height="29" src="res/screen/ios/icon-small.png" width="29" />
+    <icon height="58" src="res/screen/ios/icon-small@2x.png" width="58" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="auto-hide-splash-screen" value="false" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <name>Room of Riddles</name>
+    <description>
+        The Room of Riddles app that presents you with riddles to solve!
+    </description>
+    <author email="thijs@skipthemenu.com" href="www.skipthemenu.com">
+        Thijs van Mil
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
