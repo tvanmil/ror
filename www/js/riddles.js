@@ -3,6 +3,8 @@ slickVar = "";
 
 $('#pageHomescreen').bind( "pageshow", function( e, data ) {
 	setTimeout( function() { app.receivedEvent('loginInitiated'); }, 1000 );
+	
+
 });
 
 $('#pageRiddles').bind( "pageshow", function( e, data ) {
@@ -16,24 +18,24 @@ initCards.riddles = [];
 initCards.riddles.push({ // setup riddles for testing
 	cardid		: 1,
 	solved		: 1,
+	points		: 8,
 	question	: 'Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
-	droppables	: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
 	draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
 	solution	: [ " ", " ", "B", "C", "D", "E"," ", " " ]
 });
 initCards.riddles.push({
 	cardid		: 2,
 	solved		: 0,
+	points		: 6,
 	question	: '2Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
-	droppables	: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
 	draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
 	solution	: [ " ", " ", "B", "C", "D", "E"," ", " " ]
 });
 initCards.riddles.push({
 	cardid		: 3,
 	solved		: 0,
+	points		: 10,
 	question	: '3Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
-	droppables	: [ " ", " ", "_", "_", "_", "_", " ", " " ],	
 	draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
 	solution	: [ " ", " ", "B", "C", "D", "E"," ", " " ]
 });
@@ -127,12 +129,12 @@ var carroussel = {
 
 	downloadRiddles: function() {
 
-		$.post( "http://31.222.168.185/riddle/riddles.php", {
+		$.post( "http://31.222.168.185/riddle/index.php", {
 			action   	: 'getriddles',
 			current		: this.getLastCardId()
 		}, function(res) {
 			var json = JSON.parse(res);
-			if (json.updates == true) {
+			if (json.success == true) {
 				// res.cards bevat array met nieuwe riddles
 				var newRiddles = json.riddles;
 				var curRiddles = JSON.parse(window.localStorage[ "riddles" ]);

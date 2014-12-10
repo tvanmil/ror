@@ -11,8 +11,9 @@ var card = {
 		var $card = this.getNewCardHTML ( 
 			content.cardid, 
 			content.question, 
-			content.droppables, 
-			content.draggables
+			content.solution, 
+			content.draggables,
+			content.points
 		);
 
 		this.initializeDraggables();
@@ -32,17 +33,17 @@ var card = {
 		return $card;
 	},
 	
-	getNewCardHTML: function ( id, title, droppables, draggables ) {
+	getNewCardHTML: function ( id, title, solution, draggables, points ) {
 	
 		var $card = $( '<div id="card-'+id+'" class="card-container"></div>' );
 	
 		var $dropzones = $( '<div class="dropzones"></div>' );
 		var $letters = $( '<div class="letters"></div>' );
 		
-		$card.append( '<h2>Riddle #'+id+'</h2>' );
+		$card.append( '<h2>Riddle #'+id+' - '+points+' points</h2>' );
 		$card.append( '<h1>'+title+'</h1>' );
 		
-		$dropzones.append(this.getDroppableHTML(droppables));
+		$dropzones.append(this.getDroppableHTML(solution));
 		$letters.append(this.getDraggableHTML(draggables));
 		
 		$card.append($dropzones);
@@ -77,7 +78,7 @@ var card = {
 		var content = "";
 		$.each(droppables, function( key, value) {
 			content += '<div class="dropzone-container">' +
-				'<div class="' + (value !== ' ' ? 'droppable' : '') +'"><p class="letter-card">'+value+'</p>' +
+				'<div class="' + (value !== ' ' ? 'droppable' : '') +'"><p class="letter-card">'+(value !== ' ' ? '_' : '')+'</p>' +
 				'</div></div>';
 		});
 		return content;
@@ -177,11 +178,9 @@ var card = {
 			i++;
 		});
 		
-		//console.log(this.solution);
 		if (this.equals(this.solution, enteredSolution) ) {
 			alert("Solution correct!");
 			// for all dropzone-containers, if contains a class which start with "letter-", make it green for correct!
-			console.log( "Correct!" );
 			this.uploadCompletedRiddle(enteredSolution);
 		}
 	},
@@ -189,7 +188,7 @@ var card = {
 	uploadCompletedRiddle: function( solution ) {
 		_this = this;
 		
-		$.post( "http://31.222.168.185/riddle/postscore.php", {
+		$.post( "http://31.222.168.185/riddle/index.php", {
 			action		: "postscore",
 			cardid		: this.getCardId(),
 			email		: ( window.localStorage[ "email" ] ? window.localStorage[ "email" ] : "none" ),
@@ -197,7 +196,7 @@ var card = {
 			solution	: JSON.stringify(solution)
 		}, function(res) {
 			res = JSON.parse( res );
-			if ( res.received == true ) {
+			if ( res.success == true ) {
 				// score has been received (and maybe validated in the future)
 				_this.showCorrectVisuals( _this.getCardId() );
 				_this.setCardCompleted( _this.getCardId() );

@@ -1,6 +1,8 @@
 $('#pageLogin').bind( "pageshow", function( e, data ) {
-	//console.log("pageshow called on #pageLogin");
-	app.receivedEvent('loginInitiated');
+	//app.receivedEvent('loginInitiated...');	
+});
+$('#pageLeaderboard').bind( "pageshow", function( e, data ) {
+	auth.getLeaderboardScore();
 });
 $( "#registerButton" ).on( "click", function(event){
 	auth.register( function(result) {
@@ -59,13 +61,13 @@ var auth = {
 		var u = $( "#email", form).val();
 		var p = $( "#password", form).val();
 		if (u != '' && p != '') {
-			$.post( "http://31.222.168.185/riddle/auth.php?returnformat=json", {
+			$.post( "http://31.222.168.185/riddle/index.php", {
 				action   	: 'login',
 				email 		: u,
 				password	: p
 			}, function(res) {
 				$( "#registerButton", form ).removeAttr( "disabled" );
-				if (res.authenticated == true) {
+				if (res.success == true) {
 					window.localStorage[ "email" ] = u;
 					window.localStorage[ "password" ] = p;
 					callback(true);
@@ -90,7 +92,7 @@ var auth = {
 		var u = $( "#email", form).val();
 		var p = $( "#password", form).val();
 		if (u != '' && p != '') {
-			$.post( "http://31.222.168.185/riddle/auth.php?returnformat=json", {
+			$.post( "http://31.222.168.185/riddle/index.php", {
 				action   	: 'register',
 				email 		: u,
 				password	: p
@@ -113,19 +115,41 @@ var auth = {
 	},
 		
 	getLeaderboardScore: function() {
-		console.log( "leaderboard called." );
-		$.post( "http://31.222.168.185/riddle/getleaderbord.php", {
-			action		: 'getscore',
+		$.post( "http://31.222.168.185/riddle/index.php", {
+			action		: 'getscores',
 			email		: ( window.localStorage[ "email "] ? window.localStorage[ "email" ] : 'none' ),
 			password	: ( window.localStorage[ "password "] ? window.localStorage[ "password" ] : 'none' ),
 		}, function(res) {
-			console.log(res);
-			if (res.received == true) {
-				// update leaderboard score
+			res = JSON.parse(res);
+			if (res.success == true) {
+				str = "<table><thead><tr><th width=17%>Rank</th><th width=23%>Points</th><th>User</th></tr></thead>";
+				var counter = 1;
+				$.each( res.scores, function( index, value ){
+					str += "<tr class='"+( counter % 2 ? '' : 'alt' )+"'><td>"+counter+"</td><td>"+value.score+"</td><td>"+value.id+"</td></tr>";
+					counter++;
+				});
+				str += "</tbody></table>";
+				$( "#pageLeaderboard div[data-role='content'] #leaderboard" ).html(str);
 			} else {
 				// do nothing?
 			}
 		});
-	}
+	},
+
+	getMyScore: function() {
+		console.log("getmyscore called.");
+		$.post( "http://31.222.168.185/riddle/index.php", {
+			action		: 'myscore',
+			email		: ( window.localStorage[ "email" ] ? window.localStorage[ "email" ] : 'none' )
+		}, function(res) {
+			res = JSON.parse(res);
+			if (res.success == true) {
+				$( ".score-counter" ).html( res.score );
+			} else {
+				console.log ("Error!");
+				// do nothing?
+			}
+		});
+	}	
 
 };

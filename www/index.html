@@ -30,7 +30,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
 		<link rel="stylesheet" type="text/css" href="css/slick.css" />
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
-        <title>Hello World</title>
+        <title>Room of Riddles</title>
     </head>
     <body>
 		
@@ -38,7 +38,7 @@
 			<div data-role="panel" id="menu-panel" class="menu-panel" data-position="left" data-display="push">
 				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
-					<li><a href="#pageRiddles" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageRiddles" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Riddles</a></li>
 					<li><a href="#pageLeaderboard" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
 					<li><a href="#pageAbout" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
 				</ul>
@@ -71,7 +71,7 @@
 			<div data-role="panel" id="menu-panel" class="menu-panel" data-position="left" data-display="push">
 				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
-					<li><a href="#pageRiddles" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageRiddles" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Riddles</a></li>
 					<li><a href="#pageLeaderboard" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
 					<li><a href="#pageAbout" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
 				</ul>
@@ -80,7 +80,7 @@
 			<div data-role="header">
 				<a href="#" onclick="$('#menu-panel').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
 				<img src="img/logo.png">
-				<a href="#" class="score-counter">231.342</a>
+				<a href="#pageLeaderboard" data-rel="close" data-transition="slide" class="score-counter ui-btn ui-btn-icon-right ui-icon-delete">232.256</a>
 			</div>
 			
 			<div data-role="content"></div>
@@ -93,17 +93,15 @@
 			<div data-role="panel" id="menu-panel-home" class="menu-panel" data-position="left" data-display="push">
 				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
-					<li><a href="#" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Riddles</a></li>
 					<li><a href="#pageLeaderboard" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
 					<li><a href="#pageAbout" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
 				</ul>
             </div>   			
 			<div data-role="header">
-				<a href="#" onclick="$('#menu-panel-home').panel('open');">
-					<div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div>
-				</a>
+				<a href="#" onclick="$('#menu-panel-home').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
 				<img src="img/logo.png">
-				<a href="#" class="score-counter">231.342</a>
+				<a href="#pageLeaderboard" data-rel="close" data-transition="slide" class="score-counter ui-btn ui-btn-icon-right ui-icon-delete">232.256</a>
 			</div>
 			<div data-role="content">
 				<div id="card-caroussel"></div>
@@ -116,7 +114,7 @@
 			<div data-role="panel" id="menu-panel-leaderboard" class="menu-panel" data-position="left" data-display="push">
 				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
-					<li><a href="#pageRiddles" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageRiddles" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Riddles</a></li>
 					<li><a href="#" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
 					<li><a href="#pageAbout" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
 				</ul>
@@ -125,11 +123,12 @@
 			<div data-role="header">
 				<a href="#" onclick="$('#menu-panel-leaderboard').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
 				<img src="img/logo.png">
-				<a href="#" class="score-counter">231.342</a>
+				<a href="#pageLeaderboard" data-rel="close" data-transition="slide" class="score-counter ui-btn ui-btn-icon-right ui-icon-delete">232.256</a>
 			</div>
 			
 			<div data-role="content">
-				Leaderboard
+				<h1>Leaderboard</h1>
+				<div id="leaderboard"></div>
 			</div>
 		</div>
 
@@ -138,7 +137,7 @@
 			<div data-role="panel" id="menu-panel-about" class="menu-panel" data-position="left" data-display="push">
 				<div class="panel-header"></div>
 				<ul data-role="listview" class="ui-listview">
-					<li><a href="#pageRiddles" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Home</a></li>
+					<li><a href="#pageRiddles" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Riddles</a></li>
 					<li><a href="#pageLeaderboard" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">Leaderboard</a></li>
 					<li><a href="#" data-rel="close" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-delete">About</a></li>
 				</ul>
@@ -147,24 +146,16 @@
 			<div data-role="header">
 				<a href="#" onclick="$('#menu-panel-about').panel('open');"><div class="ui-btn ui-icon-bars ui-nodisc-icon ui-btn-icon-notext"></div></a>
 				<img src="img/logo.png">
-				<a href="#" class="score-counter">231.342</a>
+				<a href="#pageLeaderboard" data-rel="close" data-transition="slide" class="score-counter ui-btn ui-btn-icon-right ui-icon-delete">232.256</a>
 			</div>
 			
 			<div data-role="content">
 				<h1>Room of Riddles</h1>
-				<p><strong>Version 1.0.0<br/>
-				Copyright (c) 2014 - Room of Riddles B.V.</strong></p>
-				<p>The Room of Riddles app is created for Room of Riddles B.V.
-				All of the trademarks, images and logos displayed on this application
-				are the property of Room of Riddles B.V.</p>
-				
-				<p>Iedere aansprakelijkheid voor eventuele schade ten gevolge van toegang
-				tot en gebruik van de app, wordt door Room of Riddles B.V. uitdrukkelijk
-				afgewezen. Er wordt geen garantie geboden voor het foutloos en 
-				ononderbroken functioneren van de app.</p>
-				
-				
-				
+				<p>We made this app out of passion for riddles. We started a real-life 
+					escape game in Amsterdam and are currently developing Room of Riddles 
+					worldwide. We’d love to welcome you at any of our branches, check out 
+					www.roomofriddles.com for more information. If you have feedback, just 
+					mail us: feedback@roomofriddles.com</p>
 			</div>
 		</div>
 

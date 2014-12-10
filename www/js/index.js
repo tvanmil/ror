@@ -40,7 +40,7 @@ var app = {
     onDeviceReady: function() {
     	
         app.receivedEvent('deviceready');
-        
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -61,6 +61,7 @@ var app = {
 						reverse: false, 
 						changeHash: false 
 					}); }, 500 );
+					auth.getMyScore();
 				} else { // open register button
 					console.log("not logged in automatically");
 					$( "#loginPopup" ).popup( "open" );
@@ -72,6 +73,8 @@ var app = {
 };
 
 app.initialize();
+
+
 
 function showMessage(message, title){
 
