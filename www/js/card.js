@@ -66,20 +66,31 @@ var card = {
 	
 	getDraggableHTML: function ( draggables ) {
 		var content = "";
+		var counter = 0;
 		$.each(draggables, function( key, value) {
+			counter++;
 			content += '<div class="letter-container">' +
 				'<div class="draggable letter-'+value+'">' +
 				'<p class="letter-card">'+value+'</p>'+
 				'</div></div>';
+			if ( counter == 8 ) {
+				content += '<div style="float:left;clear:both;">&nbsp;</div><div style="float:left;clear:both;"></div>';
+			}
 		});
 		return content;
 	},
 	getDroppableHTML: function ( droppables ) {
 		var content = "";
+		var counter = 0;
 		$.each(droppables, function( key, value) {
+			counter++;
 			content += '<div class="dropzone-container">' +
-				'<div class="' + (value !== ' ' ? 'droppable' : '') +'"><p class="letter-card">'+(value !== ' ' ? '_' : '')+'</p>' +
+				'<div class="droppable ' + (value !== ' ' ? 'droppable-visible' : 'droppable-invisible') +'">' +
+				'<p class="letter-card">'+(value !== ' ' ? '_' : '&nbsp;')+'</p>' +
 				'</div></div>';
+			if ( counter == 8 ) {
+				content += '<div style="float:left;clear:both;">&nbsp;</div><div style="float:left;clear:both;"></div>';
+			}
 		});
 		return content;
 	},
@@ -111,7 +122,7 @@ var card = {
 	initializeDroppables: function() {
 	
 		_this = this;
-		$( ".droppable" ).droppable({
+		$( ".droppable-visible" ).droppable({
 			drop: function( event, ui ) {
 
 				$( ui.draggable ).removeClass( "scaled" );
@@ -160,10 +171,13 @@ var card = {
 		var i = 0;
 
 		$.each( $( ".slick-active" ).children( ".dropzones" ).children(), function( k, v ){ 
-
+			
+			if ( $( v ).children().attr( "class" ) == undefined ) return; // If div is spacing div, continue with next
+			
+			
 			var className = $( v ).children().attr( "class" );
+			console.log("className:"+className);
 			var foundDroppedLetter = false;
-
 			$.each( className.split( " " ), function( index, value ){
 				if ( value.substring( 0,7 ) === "letter-" ) { // this droppable has a number on it.
 					enteredSolution[i] = value.substr( 7 );
@@ -177,12 +191,30 @@ var card = {
 			}	
 			i++;
 		});
-		
-		if (this.equals(this.solution, enteredSolution) ) {
+
+		var solution = ( this.getSolution(this.getCardId()) ).solution;
+		if (this.equals(solution, enteredSolution) ) {
 			alert("Solution correct!");
 			// for all dropzone-containers, if contains a class which start with "letter-", make it green for correct!
 			this.uploadCompletedRiddle(enteredSolution);
 		}
+	},
+
+	getSolution: function( cardid ) {
+		if ( window.localStorage[ "riddles" ] ) {
+
+			var json = JSON.parse(window.localStorage[ "riddles" ]);
+			var unsolvedRiddles = jsonsql.query("select solution from json.riddles where (cardid=="+cardid+") limit 1", json);
+
+			if ( unsolvedRiddles.length > 0 ) {
+				return unsolvedRiddles[0];
+			} else {
+				return false;
+			}
+			
+		} else {
+			return false; 
+		}		
 	},
 	
 	uploadCompletedRiddle: function( solution ) {
@@ -200,6 +232,7 @@ var card = {
 				// score has been received (and maybe validated in the future)
 				_this.showCorrectVisuals( _this.getCardId() );
 				_this.setCardCompleted( _this.getCardId() );
+				auth.getMyScore();
 			} else {
 				// score has not been received or incorrect
 			}
@@ -210,7 +243,8 @@ var card = {
 		
 		$.each( json.riddles, function( index, value ){
 			if ( value.cardid == id ) {
-				json.riddles.splice(index, 1);
+				value.solved = 1;
+				//json.riddles.splice(index, 1);
 				return false;
 			}
 		});
@@ -221,7 +255,8 @@ var card = {
 	
 	showCorrectVisuals: function( id ) {
 		console.log('show correct called.');
-		$.each( this.solution, function( index, value) {
+		$.each( ( this.getSolution(this.getCardId()) ).solution, function( index, value) {
+			console.log(value);
 			if ( value !== " " ) $( ".slick-active .letters .letter-container .letter-" + value ).addClass( "correct" );
 		});
 

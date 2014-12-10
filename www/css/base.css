@@ -1,4 +1,4 @@
-html,body {
+html, body {
 	/*height:100%;*/
 }
 
@@ -8,7 +8,7 @@ strong {
 
 .ui-mobile, .ui-mobile body {
 	height: 100%;
-	background-color: yellow;
+	/*background-color: yellow;*/
 }
 
 .slide.in, .slide.out { /* page sliding transition speed */
@@ -28,7 +28,6 @@ body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 	font-weight: 300;
 	text-transform: none;
-	background-color: yellow;
 	background-color: #6cbd35;
 	background-image: linear-gradient(top, #6cbd35 0%, #3f7a63 51%);
 	background-image: -webkit-linear-gradient(top, #6cbd35 0%, #3f7a63 51%);
@@ -157,12 +156,16 @@ h2 {
 .draggable.correct {
 	background-color: #6cbd35;
 }
-.droppable {
+.droppable-visible {
 	border: 1px dashed #e4e4e4;
 	color: #b4b4b4;
 }
+.droppable-invisible {
+	border: 0 solid #000;
+	background-color: #fff;
+}
 .scaled {
-	background-color: yellow;
+	/*background-color: yellow;*/
 	-webkit-transform: scale(2, 2);
 	transform: scale(2, 2);
 }

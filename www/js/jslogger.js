@@ -35,7 +35,7 @@ window.onerror2 = function(msg, url, line) {
 			};
 		}
 		// using JQuery to post a GET request to a page that logs the error details
-		$.post( "http://31.222.168.185/riddle/index.php", data, function(res) {
+		$.post( app.backendUrl, data, function(res) {
 			console.log(res);
 			res = JSON.parse(res);
 			if (res.success == true) {

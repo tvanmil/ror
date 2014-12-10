@@ -1,9 +1,9 @@
-$('#pageLogin').bind( "pageshow", function( e, data ) {
-	//app.receivedEvent('loginInitiated...');	
-});
+//$('#pageLogin').bind( "pageshow", function( e, data ) { });
+
 $('#pageLeaderboard').bind( "pageshow", function( e, data ) {
 	auth.getLeaderboardScore();
 });
+
 $( "#registerButton" ).on( "click", function(event){
 	auth.register( function(result) {
 		if (result.success == true) {
@@ -61,7 +61,7 @@ var auth = {
 		var u = $( "#email", form).val();
 		var p = $( "#password", form).val();
 		if (u != '' && p != '') {
-			$.post( "http://31.222.168.185/riddle/index.php", {
+			$.post( app.backendUrl, {
 				action   	: 'login',
 				email 		: u,
 				password	: p
@@ -92,7 +92,7 @@ var auth = {
 		var u = $( "#email", form).val();
 		var p = $( "#password", form).val();
 		if (u != '' && p != '') {
-			$.post( "http://31.222.168.185/riddle/index.php", {
+			$.post( app.backendUrl, {
 				action   	: 'register',
 				email 		: u,
 				password	: p
@@ -115,7 +115,7 @@ var auth = {
 	},
 		
 	getLeaderboardScore: function() {
-		$.post( "http://31.222.168.185/riddle/index.php", {
+		$.post( app.backendUrl, {
 			action		: 'getscores',
 			email		: ( window.localStorage[ "email "] ? window.localStorage[ "email" ] : 'none' ),
 			password	: ( window.localStorage[ "password "] ? window.localStorage[ "password" ] : 'none' ),
@@ -138,15 +138,16 @@ var auth = {
 
 	getMyScore: function() {
 		console.log("getmyscore called.");
-		$.post( "http://31.222.168.185/riddle/index.php", {
+		$.post( app.backendUrl, {
 			action		: 'myscore',
 			email		: ( window.localStorage[ "email" ] ? window.localStorage[ "email" ] : 'none' )
 		}, function(res) {
 			res = JSON.parse(res);
 			if (res.success == true) {
+				console.log("Score received!");
 				$( ".score-counter" ).html( res.score );
 			} else {
-				console.log ("Error!");
+				console.log ("Score error!");
 				// do nothing?
 			}
 		});

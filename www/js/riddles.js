@@ -27,9 +27,9 @@ initCards.riddles.push({
 	cardid		: 2,
 	solved		: 0,
 	points		: 6,
-	question	: '2Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
-	draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
-	solution	: [ " ", " ", "B", "C", "D", "E"," ", " " ]
+	question	: '21Poor people have it. Rich people need it. If you eat it you die. <br/><br/>What is it?',
+	draggables	: [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "1", "2", "3", "4" ],
+	solution	: [ " ", " ", "B", "C", "D", "E", " ", " ", " ", " ", " ", " ", " ", " ", " ", "4" ]
 });
 initCards.riddles.push({
 	cardid		: 3,

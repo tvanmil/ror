@@ -21,6 +21,7 @@
 var app = {
 	
 	debug: false,
+	backendUrl: 'http://31.222.168.185/riddle/index.php',
 	
     // Application Constructor
     initialize: function() {
